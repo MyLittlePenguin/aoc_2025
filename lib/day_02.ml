@@ -8,7 +8,7 @@ let to_range it =
   let last = last |> int_of_string in
   range first last
 
-let is_invalid it =
+let is_invalid_1 it =
   let numstr = string_of_int it in
   let len = String.length numstr in
   let half_len = String.length numstr / 2 in
@@ -16,12 +16,31 @@ let is_invalid it =
   let last = String.sub numstr half_len half_len in
   half_len * 2 = len && first = last
 
-let filter_invalid r = List.filter is_invalid r
+let repeat n str =
+  let rec aux acc = function
+    | 0 -> acc
+    | n -> aux (acc ^ str) (n - 1)
+  in aux "" n
+
+let is_invalid_2 it =
+  let numstr = string_of_int it in
+  let len = String.length numstr in
+  let half_len = String.length numstr / 2 in
+  let rec aux pattern_len =
+    let part_count = if pattern_len = 0 then 0 else len / pattern_len in
+    let pattern = String.sub numstr 0 pattern_len in
+    match pattern_len with
+    | 0 -> false
+    | _ when numstr = repeat part_count pattern -> true
+    | pl -> aux (pl - 1) in
+  aux half_len
 
 let run file =
   let ranges =
     Utils.readfile ("inputs/" ^ file ^ ".txt")
     |> String.trim |> String.split_on_char ',' |> List.map to_range
   in
-  List.map filter_invalid ranges
+  List.map (List.filter is_invalid_1) ranges
+  |> List.flatten |> Utils.sum_int |> Utils.print 2;
+  List.map (List.filter is_invalid_2) ranges
   |> List.flatten |> Utils.sum_int |> Utils.print 2;
