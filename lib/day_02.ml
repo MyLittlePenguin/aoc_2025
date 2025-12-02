@@ -2,10 +2,11 @@ let range first last = List.init (last - first + 1) (fun it -> first + it)
 
 let to_range it =
   let dash_pos = String.index it '-' in
-  let first = String.sub it 0 dash_pos in
-  let first = first |> int_of_string in
-  let last = String.sub it (dash_pos + 1) (String.length it - dash_pos - 1) in
-  let last = last |> int_of_string in
+  let first = String.sub it 0 dash_pos |> int_of_string in
+  let last =
+    String.sub it (dash_pos + 1) (String.length it - dash_pos - 1)
+    |> int_of_string
+  in
   range first last
 
 let is_invalid_1 it =
@@ -17,10 +18,8 @@ let is_invalid_1 it =
   half_len * 2 = len && first = last
 
 let repeat n str =
-  let rec aux acc = function
-    | 0 -> acc
-    | n -> aux (acc ^ str) (n - 1)
-  in aux "" n
+  let rec aux acc = function 0 -> acc | n -> aux (acc ^ str) (n - 1) in
+  aux "" n
 
 let is_invalid_2 it =
   let numstr = string_of_int it in
@@ -32,7 +31,8 @@ let is_invalid_2 it =
     match pattern_len with
     | 0 -> false
     | _ when numstr = repeat part_count pattern -> true
-    | pl -> aux (pl - 1) in
+    | pl -> aux (pl - 1)
+  in
   aux half_len
 
 let run file =
@@ -43,4 +43,4 @@ let run file =
   List.map (List.filter is_invalid_1) ranges
   |> List.flatten |> Utils.sum_int |> Utils.print 2;
   List.map (List.filter is_invalid_2) ranges
-  |> List.flatten |> Utils.sum_int |> Utils.print 2;
+  |> List.flatten |> Utils.sum_int |> Utils.print 2
