@@ -1,6 +1,9 @@
-let readlines filename =
+let readfile filename =
   let ic = In_channel.open_text filename in
-  In_channel.input_all ic |> String.split_on_char '\n'
+  In_channel.input_all ic
+
+let readlines filename =
+  readfile filename |> String.split_on_char '\n'
 
 let drop_empty_lines = List.filter (function "" -> false | _ -> true)
 let str_tail pos str = String.sub str pos (String.length str - pos)
