@@ -20,4 +20,5 @@ let sum_float = List.fold_left ( +. ) 0.0
 
 (* Other stuff *)
 let int_of_bool = function true -> 1 | false -> 0
+let string_of_chars chars = String.init (List.length chars) (List.nth chars)
 let print day result = Printf.printf "Day %02d: %d\n" day result
