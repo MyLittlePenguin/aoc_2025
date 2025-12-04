@@ -6,4 +6,6 @@ let () =
   (* Day_02.run "02_test"; *)
   (* Day_02.run "02"; *)
   (* Day_03.run "03_test"; *)
-  Day_03.run "03";
+  (* Day_03.run "03"; *)
+  (* Day_04.run "04_test"; *)
+  Day_04.run "04";

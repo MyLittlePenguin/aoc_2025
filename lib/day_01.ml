@@ -28,7 +28,7 @@ let solution solve lines =
 
 let run file =
   let lines =
-    Utils.readlines ("inputs/" ^ file ^ ".txt") |> Utils.drop_empty_lines
+    Utils.readlines file |> Utils.drop_empty_lines
   in
   solution solve_1 lines;
   solution solve_2 lines

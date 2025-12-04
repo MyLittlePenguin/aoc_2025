@@ -44,7 +44,7 @@ let find_biggest_12_digets line =
 
 let run file =
   let lines =
-    Utils.readlines ("inputs/" ^ file ^ ".txt")
+    Utils.readlines file
     |> Utils.drop_empty_lines |> List.map String.trim
   in
   lines |> List.map find_biggest_two_digets |> Utils.sum_int |> Utils.print 3;

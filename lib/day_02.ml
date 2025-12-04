@@ -31,7 +31,7 @@ let is_invalid_2 it =
 
 let run file =
   let ranges =
-    Utils.readfile ("inputs/" ^ file ^ ".txt")
+    Utils.readfile file
     |> String.trim |> String.split_on_char ',' |> List.map to_range
   in
   List.map (List.filter is_invalid_1) ranges

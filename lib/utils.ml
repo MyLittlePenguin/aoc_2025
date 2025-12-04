@@ -1,6 +1,6 @@
 (* io *)
 let readfile filename =
-  let ic = In_channel.open_text filename in
+  let ic = In_channel.open_text ("inputs/" ^ filename ^ ".txt") in
   In_channel.input_all ic
 
 let readlines filename = readfile filename |> String.split_on_char '\n'
@@ -17,6 +17,7 @@ let repeat n str =
 let range first last = List.init (last - first + 1) (fun it -> first + it)
 let sum_int = List.fold_left ( + ) 0
 let sum_float = List.fold_left ( +. ) 0.0
+
 
 (* Other stuff *)
 let int_of_bool = function true -> 1 | false -> 0
