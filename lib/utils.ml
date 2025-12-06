@@ -26,6 +26,8 @@ let repeat n str =
 let range first last = List.init (last - first + 1) (fun it -> first + it)
 let sum_int = List.fold_left ( + ) 0
 let sum_float = List.fold_left ( +. ) 0.0
+let product_int = List.fold_left ( * ) 1
+let product_float = List.fold_left ( *. ) 1.0
 let list_contains needle list =
   let rec aux = function
     | [] -> false

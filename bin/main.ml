@@ -10,4 +10,6 @@ let () =
   (* Day_04.run "04_test"; *)
   (* Day_04.run "04"; *)
   (* Day_05.run "05_test"; *)
-  Day_05.run "05";
+  (* Day_05.run "05"; *)
+  (* Day_06.run "06_test"; *)
+  Day_06.run "06";
