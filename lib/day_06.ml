@@ -45,8 +45,8 @@ let run file =
   let last_line = Array.length lines - 1 in
   let line_length = String.length lines.(0) in
   let transposed_no_op =
-    Array.init line_length (fun col ->
-        String.init last_line (fun row -> String.get lines.(row) col))
+    Utils.transpose_string_array lines
+    |> Array.map (fun it -> String.sub it 0 last_line)
   in
   let operators = lines.(last_line) in
   let rec aux last_op sum acc i =
@@ -62,8 +62,7 @@ let run file =
       | '+' -> aux '+' (acc + sum) number next
       | _ ->
           aux last_op sum
-            (number
-            |> (if last_op = '+' then ( + ) else ( * )) acc)
+            (number |> (if last_op = '+' then ( + ) else ( * )) acc)
             next
   in
   aux ' ' 0 0 0 |> Utils.print 6;

@@ -1,3 +1,5 @@
+exception ElfPanic
+
 (* io *)
 let readfile filename =
   let ic = In_channel.open_text ("inputs/" ^ filename ^ ".txt") in
@@ -22,19 +24,40 @@ let repeat n str =
   let rec aux acc = function 0 -> acc | n -> aux (acc ^ str) (n - 1) in
   aux "" n
 
+let find_occurances needle line =
+  let needle_length = String.length needle in
+  let line_length = String.length line in
+  let rec aux acc pos =
+    if pos + needle_length >= line_length then List.rev acc
+    else
+      let next = pos + 1 in
+      match String.sub line pos needle_length with
+      | sub when sub = needle -> aux (pos :: acc) next
+      | sub when sub = needle -> aux (pos :: acc) next
+      | _ -> aux acc next
+  in
+  aux [] 0
+
 (* List stuff *)
 let range first last = List.init (last - first + 1) (fun it -> first + it)
 let sum_int = List.fold_left ( + ) 0
 let sum_float = List.fold_left ( +. ) 0.0
 let product_int = List.fold_left ( * ) 1
 let product_float = List.fold_left ( *. ) 1.0
+
 let list_contains needle list =
   let rec aux = function
     | [] -> false
     | hd :: _ when hd = needle -> true
     | _ :: tl -> aux tl
-  in aux list
-    
+  in
+  aux list
+
+let transpose_string_array lines =
+  let line_length = lines.(0) |> String.length in
+  let line_count = Array.length lines in
+  Array.init line_length (fun col ->
+      String.init line_count (fun row -> String.get lines.(row) col))
 
 (* Other stuff *)
 let int_of_bool = function true -> 1 | false -> 0
