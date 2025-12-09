@@ -68,6 +68,6 @@ let run file =
   let lines = Utils.readlines file |> Utils.drop_empty_lines |> Array.of_list in
   let beamed = run_beams lines in
   (* Array.iter print_endline beamed; *)
-  count_splits beamed |> Utils.print 6;
-  count_timelines beamed |> Utils.print 6;
+  count_splits beamed |> Utils.print 7;
+  count_timelines beamed |> Utils.print 7;
   ignore lines

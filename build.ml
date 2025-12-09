@@ -1,5 +1,3 @@
-#!/usr/bin/env ocaml
-
 let rec run = function
   | "" | "run" -> cmd "dune exec -- aoc_2025"
   | "build" -> cmd "dune build --release"
