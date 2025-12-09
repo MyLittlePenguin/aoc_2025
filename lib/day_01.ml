@@ -23,8 +23,7 @@ let solve_2 acc it =
   (counter + zero_crossings, new_pos)
 
 let solution solve lines =
-  lines |> List.map to_int |> List.fold_left solve (0, 50) |> fun acc ->
-  fst acc |> Utils.print 1
+  lines |> List.map to_int |> List.fold_left solve (0, 50) |> fst |> Utils.print 1
 
 let run file =
   let lines =
